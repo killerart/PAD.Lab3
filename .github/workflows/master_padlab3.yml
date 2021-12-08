@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  build-and-test:
     runs-on: windows-latest
 
     steps:
@@ -24,7 +24,10 @@ jobs:
 
       - name: Build with dotnet
         run: dotnet build --configuration Release
-
+        
+      - name: Unit Tests
+        run: dotnet test
+        
       - name: dotnet publish
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
