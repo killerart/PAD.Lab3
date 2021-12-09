@@ -58,3 +58,12 @@ jobs:
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_D9658261FB3F451CBEE112AD4C992E8B }}
           package: .
+
+      - name: Deploy to Azure Web App 2
+        id: deploy-to-webapp2
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'padlab3-2'
+          slot-name: 'Production'
+          publish-profile: ${{ secrets.AZURE_LAB_PAD3_2 }}
+          package: .

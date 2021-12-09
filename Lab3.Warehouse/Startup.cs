@@ -22,16 +22,16 @@ namespace Lab3.Warehouse {
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger) {
+            app.Use(async (context, next) => {
+                logger.LogInformation("[{Now}] {Method} {Scheme}://{Host}{Path}",
+                                      DateTime.Now,
+                                      context.Request.Method,
+                                      context.Request.Scheme,
+                                      context.Request.Host,
+                                      context.Request.Path);
+                await next.Invoke();
+            });
             if (env.IsDevelopment()) {
-                app.Use(async (context, next) => {
-                    logger.LogDebug("[{Now}] {Method} {Scheme}://{Host}{Path}",
-                                    DateTime.Now,
-                                    context.Request.Method,
-                                    context.Request.Scheme,
-                                    context.Request.Host,
-                                    context.Request.Path);
-                    await next.Invoke();
-                });
                 app.UseDeveloperExceptionPage();
             }
 
