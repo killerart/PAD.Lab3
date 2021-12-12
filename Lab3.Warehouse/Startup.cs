@@ -18,7 +18,6 @@ namespace Lab3.Warehouse {
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
-            services.AddSwaggerGen(options => options.SwaggerDoc("v1", new OpenApiInfo { Title = "Lab3.Warehouse", Version = "v1" }));
             services.AddInstallersFromAssemblyContaining<IWarehouseMarker>(Configuration);
         }
 

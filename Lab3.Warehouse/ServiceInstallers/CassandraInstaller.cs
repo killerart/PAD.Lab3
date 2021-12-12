@@ -16,8 +16,10 @@ namespace Lab3.Warehouse.ServiceInstallers {
         public void AddServices(IServiceCollection services, IConfiguration configuration) {
             MappingConfiguration.Global.Define<IngredientMapping>();
 
+            var cassandraHostname = configuration["Cassandra:Hostname"];
+
             var options = new SSLOptions(SslProtocols.Tls12, true, ValidateServerCertificate);
-            options.SetHostNameResolver(_ => "pad.cassandra.cosmos.azure.com");
+            options.SetHostNameResolver(_ => cassandraHostname);
 
             var cassandraConnectionString = configuration.GetConnectionString("Cassandra");
             var cluster = Cluster.Builder()
